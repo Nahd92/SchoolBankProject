@@ -40,6 +40,5 @@ namespace SchoolBankProject.Gateway.Services.CustomerService
             var customeREsult = await _httpClient.PostAsync(CustomerUrl, content);
             return customeREsult;
         }
-
     }
 }

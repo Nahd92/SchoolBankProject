@@ -1,5 +1,6 @@
 ﻿using SchoolBankProject.Domain.Routes;
 using SchoolBankProject.DTOs.AccountDTOs.Request;
+using SchoolBankProject.DTOs.AccountDTOs.Response;
 using SchoolBankProject.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -54,7 +55,14 @@ namespace SchoolBankProjet.API.Controllers
             if (depositResult)
             { 
                 _repositorywrapper.Transactions.AddTransaction(account.AccountNumber, request.Amount, DateTime.Now, account.Id, nameof(Deposit));
-                return Ok();
+
+                var response = new depositResponse()
+                {
+                    Balance = request.Amount,
+                    SucessfullyDeposit = "Successfully deposit",
+                };
+
+                return Json(response);
             }
 
             return BadRequest("Something happened");
@@ -74,9 +82,14 @@ namespace SchoolBankProjet.API.Controllers
             if (depositResult)
             {
                 _repositorywrapper.Transactions.AddTransaction(account.AccountNumber, request.Amount, DateTime.Now, account.Id, nameof(Withdraw));
-                return Ok();
-            }
 
+                var withdrawResponse = new withdrawResponse()
+                {
+                    Balance = account.Balance,
+                    SucessfullyWithdraw = "Successfully withdraw"
+                };
+                return Json(withdrawResponse);
+            }
             return BadRequest("Not enough money on your account!");
         }
     }

@@ -28,19 +28,19 @@ namespace SchoolBankProject.CustomerAPI.Controllers
             if (customers == null)
                 return NotFound();
 
-            return Ok(customers);
+            return Json(customers);
         }
 
         [HttpGet]
         [Route(RoutesAPI.Customers.GetCustomerById)]
-        public async Task<IHttpActionResult> GetById(Guid id)
+        public async Task<IHttpActionResult> GetById(Guid? id)
         {
-            var customer = await _repository.Customers.GetCustomerById(id);
+            var customer = await _repository.Customers.GetCustomerById((Guid)id);
 
             if (customer == null)
                 return NotFound();
 
-            return Ok(customer);
+            return Json(customer);
         }
 
         [HttpPost]
@@ -48,9 +48,8 @@ namespace SchoolBankProject.CustomerAPI.Controllers
         public async Task<IHttpActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
         {
 
-
-            if (createCustomerRequest.Type == null)
-                return BadRequest("Type is null");
+            if (!ModelState.IsValid)
+                return BadRequest("Some fields was not inputed");
 
             var customer = new Customer()
             {

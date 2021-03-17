@@ -45,6 +45,8 @@
     <Compile Include="AccountDTOs\Request\CreateDepositRequest.cs" />
     <Compile Include="AccountDTOs\Request\CreateRequest.cs" />
     <Compile Include="AccountDTOs\Request\CreateWithdrawRequest.cs" />
+    <Compile Include="AccountDTOs\Response\depositResponse.cs" />
+    <Compile Include="AccountDTOs\Response\withdrawResponse.cs" />
     <Compile Include="ClientsDTOs\Request\CreateDepositRequest.cs" />
     <Compile Include="CustomerDTOs\Request\CreateCustomerRequest.cs" />
     <Compile Include="CustomerDTOs\Request\UpdateCustomerRequest.cs" />
@@ -54,7 +56,6 @@
     <Compile Include="UserDTOs\UserRegisterRequest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AccountDTOs\Response\" />
     <Folder Include="ClientsDTOs\Response\" />
     <Folder Include="TransferDTOs\Response\" />
   </ItemGroup>

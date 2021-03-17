@@ -23,7 +23,7 @@ namespace SchoolBankProject.Client.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(Login model, string returnUrl)
+        public  ActionResult Login(Login model, string returnUrl)
         {
             return View();
         }
