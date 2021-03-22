@@ -3,9 +3,7 @@ using SchoolBankProject.DTOs.CustomerDTOs.Request;
 using SchoolBankProject.DTOs.CustomerDTOs.Response;
 using SchoolBankProject.LinqSql.Data;
 using SchoolBankProject.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace SchoolBankProject.CustomerAPI.Controllers
