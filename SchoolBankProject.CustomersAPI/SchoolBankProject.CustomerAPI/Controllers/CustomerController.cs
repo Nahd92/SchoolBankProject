@@ -1,10 +1,10 @@
-﻿using SchoolBankProject.Domain.AccountModels;
-using SchoolBankProject.Domain.CustomerModels;
-using SchoolBankProject.Domain.Routes;
+﻿using SchoolBankProject.Domain.Routes;
 using SchoolBankProject.DTOs.CustomerDTOs.Request;
 using SchoolBankProject.DTOs.CustomerDTOs.Response;
+using SchoolBankProject.LinqSql.Data;
 using SchoolBankProject.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -21,9 +21,9 @@ namespace SchoolBankProject.CustomerAPI.Controllers
 
         [HttpGet]
         [Route(RoutesAPI.Customers.GetAllCustomers)]
-        public async Task<IHttpActionResult> GetAllCustomers()
+        public IHttpActionResult GetAllCustomers()
         {
-            var customers = await _repository.Customers.GetAllCustomers();
+            var customers =  _repository.Customers.GetAllCustomers();
 
             if (customers == null)
                 return NotFound();
@@ -32,10 +32,24 @@ namespace SchoolBankProject.CustomerAPI.Controllers
         }
 
         [HttpGet]
-        [Route(RoutesAPI.Customers.GetCustomerById)]
-        public async Task<IHttpActionResult> GetById(Guid? id)
+        [Route(RoutesAPI.Customers.GetAllCustomersBankAccounts)]
+        public IHttpActionResult GetAllCustomersBankAccounts(int id)
         {
-            var customer = await _repository.Customers.GetCustomerById((Guid)id);
+            var customer = _repository.Customers.GetCustomersBankAccounts(id);
+
+            var response = new List<string>();
+            foreach (var c in customer)
+            {
+                response.Add($"BankAccount: {c}");
+            }
+            return Json(response);
+        }
+
+        [HttpGet]
+        [Route(RoutesAPI.Customers.GetCustomerById)]
+        public IHttpActionResult GetById(int? id)
+        {
+            var customer = _repository.Customers.GetCustomerById((int)id);
 
             if (customer == null)
                 return NotFound();
@@ -45,61 +59,30 @@ namespace SchoolBankProject.CustomerAPI.Controllers
 
         [HttpPost]
         [Route(RoutesAPI.Customers.CreateCustomer)]
-        public async Task<IHttpActionResult> CreateCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
+        public IHttpActionResult CreateCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
         {
 
-            if (!ModelState.IsValid)
-                return BadRequest("Some fields was not inputed");
+          var createdCustomer =  _repository.Customers.CreateCustomer(createCustomerRequest);
+          var accountType = _repository.BankAccount.GetAccountTypeByName(createCustomerRequest.Type);
 
-            var customer = new Customer()
-            {
-                Id = Guid.NewGuid(),
-                FirstName = createCustomerRequest.FirstName,
-                LastName = createCustomerRequest.LastName,
-                Address = createCustomerRequest.Address,
-                Country = createCustomerRequest.Country,
-                PhoneNumber = createCustomerRequest.PhoneNumber
-            };
-
-            var created = await _repository.Customers.CreateCustomer(customer);
-
-            if (!created)
-                return BadRequest("Something went wrong in creating customer");
-
-
-            var accountType = await _repository.BankAccount.GetAccountTypeByName(createCustomerRequest.Type);
-
-            if (accountType == null)
+           if (accountType == null)
                 return BadRequest("No AccountType exist with that name");
 
 
-            var createdBankAccount = await _repository.BankAccount.CreateBankAccount(
+            var createdBankAccount = _repository.BankAccount.CreateBankAccount(
                  new BankAccount()
                  {
-                     Id = Guid.NewGuid(),
                      Balance = 0,
                      AccountNumber = _repository.BankAccount.CreateAccountNumber(),
-                     ClearingNumber = _repository.BankAccount.ReturnClearingNumber(),
-                     CustomerId = customer.Id,
+                     ClearingNumber = _repository.BankAccountService.ReturnClearingNumber(),
+                     CustomerId = createdCustomer.Id,
                      IBANNumber = _repository.BankAccount.CreateIBANNumber(),
                      AccountTypeId = accountType.Id,
                  });
 
-            var response = new CreatedCustomerResponse
-            {
-                Id = customer.Id,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Address = customer.Address,
-                Country = customer.Country,
-                PhoneNumber = customer.PhoneNumber,
-                AccountNumber = createdBankAccount.AccountNumber,
-                Balance = createdBankAccount.Balance,
-                ClearingNumber = createdBankAccount.ClearingNumber,
-                IBANNumber = createdBankAccount.IBANNumber
-            };
 
-            return Json(response);
+           var response = CreateCustomerResponse.Response(createdCustomer, createdBankAccount);
+            return Ok(response);
         }
     }
 }

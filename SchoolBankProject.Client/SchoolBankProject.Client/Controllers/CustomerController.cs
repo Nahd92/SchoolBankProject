@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SchoolBankProject.DTOs.CustomerDTOs.Request;
+using SchoolBankProject.DTOs.ClientsDTOs.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;

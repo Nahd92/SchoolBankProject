@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,12 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAccountServices.cs" />
-    <Compile Include="Interfaces\ICustomerServices.cs" />
+    <Compile Include="ServiceInterfaces\IBankAccountService.cs" />
+    <Compile Include="Interfaces\IBankAccountRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\IRepositoryWrapper.cs" />
-    <Compile Include="Interfaces\ITransactionServices.cs" />
+    <Compile Include="Interfaces\ITransactionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryWrapper\RepositoryWrapper.cs" />
+    <Compile Include="Repositories\BankAccountRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\TransactionsRepository.cs" />
+    <Compile Include="Wrappers\Wrapper.cs" />
     <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\CustomerServices.cs" />
     <Compile Include="Services\TransactionService.cs" />
@@ -64,6 +69,14 @@
     <ProjectReference Include="..\..\SchoolBankProject.DAL\SchoolBankProject.Domain\SchoolBankProject.Domain.csproj">
       <Project>{33d7175e-b09b-4106-8cec-f7664b6b12ec}</Project>
       <Name>SchoolBankProject.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\SchoolBankProject.LinqSql.Data.csproj">
+      <Project>{e34cd490-20ae-47bf-9f5d-9f3d3e824b5e}</Project>
+      <Name>SchoolBankProject.LinqSql.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.DTOs\SchoolBankProject.DTOs\SchoolBankProject.DTOs.csproj">
+      <Project>{4828A12D-FC00-490E-AB89-8452D72FB609}</Project>
+      <Name>SchoolBankProject.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

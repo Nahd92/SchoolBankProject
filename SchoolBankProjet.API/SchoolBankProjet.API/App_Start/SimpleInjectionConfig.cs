@@ -1,5 +1,7 @@
 ﻿using SchoolBankProject.Data;
+using SchoolBankProject.LinqSql.Data;
 using SchoolBankProject.Services.Interfaces;
+using SchoolBankProject.Services.Repositories;
 using SchoolBankProject.Services.RepositoryWrapper;
 using SchoolBankProject.Services.Services;
 using SimpleInjector;
@@ -18,11 +20,13 @@ namespace SchoolBankProjet.API.App_Start
 
             //Register dependency injection
 
-            container.Register<IAccountServices, AccountServices>(Lifestyle.Scoped);
-            container.Register<ICustomerServices, CustomerServices>(Lifestyle.Scoped);
-            container.Register<ITransactionServices, TransactionsService>(Lifestyle.Scoped);
 
-            container.Register<SchoolBankContext>(Lifestyle.Scoped);
+            container.Register<IBankAccountRepository, BankAccountRepository>(Lifestyle.Scoped);
+            container.Register<ICustomerRepository, CustomerRepository>(Lifestyle.Scoped);
+            container.Register<ITransactionRepository, TransactionsRepository>(Lifestyle.Scoped);
+
+            //  container.Register<SchoolBankContext>(Lifestyle.Scoped);
+            //container.Register<LinqDataDataContext>(Lifestyle.Scoped);
             container.Register<IRepositoryWrapper, RepositoryWrapper>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

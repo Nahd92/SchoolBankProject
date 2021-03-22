@@ -34,3 +34,6 @@ C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\obj\Debug\Service.Test.csproj.CopyComplete
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\obj\Debug\Service.Test.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\obj\Debug\Service.Test.pdb
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Services\Service.Test\bin\Debug\Microsoft.AspNet.Identity.Core.xml

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using SchoolBankProject.Domain.AccountTypes;
 using SchoolBankProject.Domain.CustomerModels;
 using SchoolBankProject.Domain.Interfaces;
 using System;
@@ -9,7 +9,7 @@ namespace SchoolBankProject.Domain.AccountModels
     public  class BankAccount : IBankAccount
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public float Balance { get; set;  }

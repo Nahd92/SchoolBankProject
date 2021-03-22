@@ -53,12 +53,12 @@
     <Compile Include="Interfaces\IBankAccount.cs" />
     <Compile Include="Interfaces\ICustomer.cs" />
     <Compile Include="Interfaces\ITransaction.cs" />
-    <Compile Include="Models\AccountModels\AccountType.cs" />
+    <Compile Include="Models\AccountType\AccountType.cs" />
     <Compile Include="Models\AccountModels\BankAccount.cs" />
     <Compile Include="Models\CustomerModels\Customer.cs" />
     <Compile Include="Models\TransactionModels\Transaction.cs" />
     <Compile Include="Models\UserModels\Login.cs" />
-    <Compile Include="Models\UserModels\Register.cs" />
+    <Compile Include="Models\UserModels\RegisterRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routes\RoutesAPI.cs" />
   </ItemGroup>

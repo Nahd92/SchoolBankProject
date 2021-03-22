@@ -8,7 +8,7 @@ namespace SchoolBankProject.DTOs.AccountDTOs.Request
 {
     public abstract class CreateRequest
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public float Balance { get; set; }
         public string AccountNumber { get; set; }
 

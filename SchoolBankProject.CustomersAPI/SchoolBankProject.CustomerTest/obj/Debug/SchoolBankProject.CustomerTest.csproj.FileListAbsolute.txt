@@ -15,8 +15,6 @@ C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\Sch
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Web.Http.dll
-C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.Data.dll
-C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\EntityFramework.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.DTOs.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SimpleInjector.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Web.Http.WebHost.dll
@@ -36,8 +34,6 @@ C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\Sch
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Web.Http.xml
-C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.Data.pdb
-C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.Data.dll.config
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.DTOs.pdb
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SimpleInjector.xml
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\System.Web.Http.WebHost.xml
@@ -49,3 +45,6 @@ C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\Sch
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\obj\Debug\SchoolBankProject.CustomerTest.csproj.CopyComplete
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\obj\Debug\SchoolBankProject.CustomerTest.dll
 C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\obj\Debug\SchoolBankProject.CustomerTest.pdb
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.LinqSql.Data.dll
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.LinqSql.Data.pdb
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.CustomersAPI\SchoolBankProject.CustomerTest\bin\Debug\SchoolBankProject.LinqSql.Data.dll.config

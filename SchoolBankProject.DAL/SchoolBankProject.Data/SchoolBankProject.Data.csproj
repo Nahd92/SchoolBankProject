@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationUser\ApplicationUser.cs" />
     <Compile Include="Data\SchoolBankContext.cs" />
     <Compile Include="Migrations\202103142241213_initialcommit.cs" />
     <Compile Include="Migrations\202103142241213_initialcommit.designer.cs">
@@ -65,6 +66,10 @@
     <Compile Include="Migrations\202103142246446_commit.cs" />
     <Compile Include="Migrations\202103142246446_commit.designer.cs">
       <DependentUpon>202103142246446_commit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103180914287_addedIdentity.cs" />
+    <Compile Include="Migrations\202103180914287_addedIdentity.designer.cs">
+      <DependentUpon>202103180914287_addedIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103142246446_commit.resx">
       <DependentUpon>202103142246446_commit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103180914287_addedIdentity.resx">
+      <DependentUpon>202103180914287_addedIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

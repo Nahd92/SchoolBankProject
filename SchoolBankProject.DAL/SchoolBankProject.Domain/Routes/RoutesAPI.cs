@@ -15,6 +15,7 @@ namespace SchoolBankProject.Domain.Routes
         public static class Accounts
         {
             public const string GetAllAccounts = Base + "Accounts";
+            public const string CreateAccount = Base + "Account";
             public const string GetAccount = Base + "Account/{id}";
             public const string Withdraw = Base + "Account/Withdraw";
             public const string TransferMoney = Base + "Account/TransferMoney";
@@ -24,6 +25,7 @@ namespace SchoolBankProject.Domain.Routes
         public static class Customers
         {
             public const string GetAllCustomers = Base + "Customers";
+            public const string GetAllCustomersBankAccounts = Base + "Customers" + "/BankAccounts/{id}";
             public const string CreateCustomer = Base + "Customer";
             public const string GetCustomerById = Base + "Customer/{id}";
             public const string UpdateCustomer = Base + "Customer/{id}";

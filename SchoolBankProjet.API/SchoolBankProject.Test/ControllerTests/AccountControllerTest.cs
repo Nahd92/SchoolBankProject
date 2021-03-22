@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SchoolBankProject.Domain.AccountModels;
 using SchoolBankProject.DTOs.AccountDTOs.Request;
 using SchoolBankProject.DTOs.AccountDTOs.Response;
+using SchoolBankProject.LinqSql.Data;
 using SchoolBankProject.Services.Interfaces;
 using SchoolBankProjet.API.Controllers;
 using System;
@@ -30,34 +30,34 @@ namespace SchoolBankProject.Test.ControllerTests
 
         private IEnumerable<BankAccount> bankAccounts = new List<BankAccount>
         {
-            new BankAccount() { Id = Guid.NewGuid(),
+            new BankAccount() { Id = 1,
                 AccountNumber = "1234562",
                 IBANNumber = "1234412344123123",
                 Balance = 0,
                 ClearingNumber = "1234123",
-                CustomerId  = Guid.NewGuid(),
+                CustomerId  = 2,
                 AccountTypeId = 1  }
         };
 
         private BankAccount bankAccountById = new BankAccount()
         {
-            Id = Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF"),
+            Id = 1 ,
             AccountNumber = "1234562",
             IBANNumber = "1234412344123123",
             Balance = 0,
             ClearingNumber = "1234123",
-            CustomerId = Guid.NewGuid(),
+            CustomerId = 2,
             AccountTypeId = 1
         };
 
         private BankAccount bankAccount = new BankAccount()
         {
-            Id = Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF"),
+            Id = 1,
             AccountNumber = "1234562",
             IBANNumber = "1234412344123123",
             Balance = 0,
             ClearingNumber = "1234123",
-            CustomerId = Guid.NewGuid(),
+            CustomerId = 2,
             AccountTypeId = 1
         };
 
@@ -65,13 +65,13 @@ namespace SchoolBankProject.Test.ControllerTests
 
 
         [TestMethod]
-        public async Task TestGetAccount_ShouldReturnOkAndContainOneAccountInList()
+        public void TestGetAccount_ShouldReturnOkAndContainOneAccountInList()
         {
             //Arrange
-            mockService.Setup(x => x.BankAccount.GetAccounts()).Returns(Task.Run(() => bankAccounts));
+            mockService.Setup(x => x.BankAccount.GetAccounts()).Returns(bankAccounts);
 
             //Act
-            var response = await accountController.GetBankAccounts();
+            var response = accountController.GetBankAccounts();
             //Assert
             var result = response.Should().BeOfType<JsonResult<IEnumerable<BankAccount>>>().Subject;
             var account = result.Content.Should().BeAssignableTo<IEnumerable<BankAccount>>().Subject;
@@ -79,12 +79,12 @@ namespace SchoolBankProject.Test.ControllerTests
         }
 
         [TestMethod]
-        public async Task TestGetAccountById_ShouldReturnCorrectId()
+        public void TestGetAccountById_ShouldReturnCorrectId()
         {
             //Arrange
-            mockService.Setup(x => x.BankAccount.GetAccountById(It.IsAny<Guid>())).Returns(Task.Run(() => bankAccountById));
+            mockService.Setup(x => x.BankAccount.GetAccountById(It.IsAny<int>())).Returns(bankAccountById);
             //Act
-            var response = await accountController.GetBankAccount(Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF"));
+            var response = accountController.GetBankAccount(1);
             //Assert
             var result = response.Should().BeOfType<JsonResult<BankAccount>>().Subject;
             var account = result.Content.Should().BeAssignableTo<BankAccount>().Subject;
@@ -92,44 +92,44 @@ namespace SchoolBankProject.Test.ControllerTests
         }
 
         [TestMethod]
-        public async Task TestDepsosit_BalanceShouldIncreaseCorrectly()
+        public void TestDepsosit_BalanceShouldIncreaseCorrectly()
         {
             //Arrange
-            var DepositRequest = new CreateDepositRequest() {Id = Guid.NewGuid(),Balance = 0, IBANNumber = "123451235", 
+            var DepositRequest = new CreateDepositRequest() {Id = 1, Balance = 0, IBANNumber = "123451235", 
                 AccountNumber = "123451235", Amount = 2000, ClearingNumber = "2134123" };
-            mockService.Setup(y => y.BankAccount.GetAccountById(It.IsAny<Guid>())).Returns(Task.Run(() => bankAccountById));
-            mockService.Setup(x => x.BankAccount.Deposit(It.IsAny<Guid>(), It.IsAny<BankAccount>(), It.IsAny<int>())).ReturnsAsync(true);
-            mockService.Setup(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<string>()));
+            mockService.Setup(y => y.BankAccount.GetAccountById(It.IsAny<int>())).Returns(bankAccountById);
+            mockService.Setup(x => x.BankAccount.Deposit(It.IsAny<int>(), It.IsAny<int>()));
+            mockService.Setup(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<string>()));
 
 
             //Act
-            var response = await accountController.Deposit(DepositRequest);
+            var response = accountController.Deposit(DepositRequest);
 
             //Assert
-            mockService.Verify(x => x.BankAccount.GetAccountById(It.IsAny<Guid>()), Times.Once());
-            mockService.Verify(x => x.BankAccount.Deposit(It.IsAny<Guid>(), It.IsAny<BankAccount>(), It.IsAny<int>()), Times.Once());
-            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<string>()));
-            var result = response.Should().BeOfType<JsonResult<depositResponse>>().Subject;
-            var account = result.Content.Should().BeAssignableTo<depositResponse>().Subject;
+            mockService.Verify(x => x.BankAccount.GetAccountById(It.IsAny<int>()), Times.Once());
+            mockService.Verify(x => x.BankAccount.Deposit(It.IsAny<int>(), It.IsAny<int>()), Times.Once());
+            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<string>()));
+            var result = response.Should().BeOfType<JsonResult<DepositResponse>>().Subject;
+            var account = result.Content.Should().BeAssignableTo<DepositResponse>().Subject;
             account.Balance.Should().Be(2000);
         }
 
         [TestMethod]
-        public async Task TestWithDraw_BalanceShouldDecreaseCorrectly()
+        public void TestWithDraw_BalanceShouldDecreaseCorrectly()
         {
             //Arrange
             var DepositRequest = new CreateWithdrawRequest() { Amount = 2000};
-            mockService.Setup(y => y.BankAccount.GetAccountById(It.IsAny<Guid>())).Returns(Task.Run(() => bankAccountById));
-            mockService.Setup(x => x.BankAccount.Withdraw(It.IsAny<Guid>(), It.IsAny<BankAccount>(), It.IsAny<int>())).ReturnsAsync(true);
-            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<string>()));
+            mockService.Setup(y => y.BankAccount.GetAccountById(It.IsAny<int>())).Returns(bankAccountById);
+            mockService.Setup(x => x.BankAccount.Withdraw(It.IsAny<int>(), It.IsAny<int>()));
+            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<string>()));
 
             //Act
-            var response = await accountController.Withdraw(DepositRequest);
+            var response =  accountController.Withdraw(DepositRequest);
 
             //Assert
-            mockService.Verify(x => x.BankAccount.GetAccountById(It.IsAny<Guid>()), Times.Once());
-            mockService.Verify(x => x.BankAccount.Deposit(It.IsAny<Guid>(), It.IsAny<BankAccount>(), It.IsAny<int>()), Times.Once());
-            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<Guid>(), It.IsAny<string>()));
+            mockService.Verify(x => x.BankAccount.GetAccountById(It.IsAny<int>()), Times.Once());
+            mockService.Verify(x => x.BankAccount.Deposit(It.IsAny<int>(), It.IsAny<int>()), Times.Once());
+            mockService.Verify(x => x.Transactions.AddTransaction(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<string>()));
         
         }
     }

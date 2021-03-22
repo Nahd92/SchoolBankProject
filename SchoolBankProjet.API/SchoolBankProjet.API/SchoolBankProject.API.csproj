@@ -149,6 +149,10 @@
       <Project>{33d7175e-b09b-4106-8cec-f7664b6b12ec}</Project>
       <Name>SchoolBankProject.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\SchoolBankProject.LinqSql.Data.csproj">
+      <Project>{E34CD490-20AE-47BF-9F5D-9F3D3E824B5E}</Project>
+      <Name>SchoolBankProject.LinqSql.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SchoolBankProject.DTOs\SchoolBankProject.DTOs\SchoolBankProject.DTOs.csproj">
       <Project>{4828a12d-fc00-490e-ab89-8452d72fb609}</Project>
       <Name>SchoolBankProject.DTOs</Name>

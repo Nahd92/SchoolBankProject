@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SchoolBankProject.DTOs.AccountDTOs.Response
 {
-    public class depositResponse
+    public class DepositResponse
     {
         public float Balance { get; set; }
-        public string SucessfullyDeposit { get; set; }
+        public string DepositResponses { get; set; }
     }
 }

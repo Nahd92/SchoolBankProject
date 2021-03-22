@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SchoolBankProject.Data;
-using SchoolBankProject.Domain.CustomerModels;
 using SchoolBankProject.Services.Services;
 using System;
 using System.Collections.Generic;
@@ -50,7 +49,7 @@ namespace Service.Test
 
             //Act
             var customerRepo = new CustomerServices(dbContextMock.Object);
-            var customer = customerRepo.GetCustomerById(Guid.NewGuid()).Result;
+            var customer = customerRepo.GetCustomerById(1).Result;
             //Assert
             customer.Should().NotBeNull();
             customer.Should().BeOfType<Customer>();

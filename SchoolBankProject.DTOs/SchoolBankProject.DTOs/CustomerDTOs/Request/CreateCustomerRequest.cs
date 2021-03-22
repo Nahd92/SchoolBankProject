@@ -20,5 +20,10 @@ namespace SchoolBankProject.DTOs.CustomerDTOs.Request
         [Required]
         public string PersonalNumber { get; set; }
 
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+
     }
 }

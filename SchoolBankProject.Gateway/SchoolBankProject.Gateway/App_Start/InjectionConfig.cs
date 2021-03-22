@@ -1,5 +1,6 @@
 ﻿using SchoolBankProject.Gateway.Services.AccountService;
 using SchoolBankProject.Gateway.Services.CustomerService;
+using SchoolBankProject.Gateway.Services.IdentityService;
 using SchoolBankProject.Gateway.Services.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
@@ -20,7 +21,9 @@ namespace SchoolBankProject.Gateway.App_Start
             //Register dependency injection
             container.Register<IAccountGateway, AccoutGatewayServices>(Lifestyle.Scoped);
             container.Register<ICustomerGateway, CustomerGatewayServices>(Lifestyle.Scoped);
-            
+            container.Register<IIdentityGateway, IdentityGatewayServices>(Lifestyle.Scoped);
+
+
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));

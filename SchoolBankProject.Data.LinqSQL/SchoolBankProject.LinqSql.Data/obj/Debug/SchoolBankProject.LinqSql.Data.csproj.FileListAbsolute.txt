@@ -1,0 +1,7 @@
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\bin\Debug\SchoolBankProject.LinqSql.Data.dll.config
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\bin\Debug\SchoolBankProject.LinqSql.Data.dll
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\bin\Debug\SchoolBankProject.LinqSql.Data.pdb
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\obj\Debug\SchoolBankProject.LinqSql.Data.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\obj\Debug\SchoolBankProject.LinqSql.Data.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\obj\Debug\SchoolBankProject.LinqSql.Data.dll
+C:\Users\Admin\source\repos\SchoolBankProject\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\obj\Debug\SchoolBankProject.LinqSql.Data.pdb

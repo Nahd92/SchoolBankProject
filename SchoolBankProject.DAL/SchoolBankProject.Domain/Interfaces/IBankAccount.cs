@@ -9,7 +9,7 @@ namespace SchoolBankProject.Domain.Interfaces
 {
     public interface IBankAccount
     {
-         Guid Id { get; set; }
+         int Id { get; set; }
          float Balance { get; set; }
          string AccountNumber { get; set; }
          string ClearingNumber { get; set; }     

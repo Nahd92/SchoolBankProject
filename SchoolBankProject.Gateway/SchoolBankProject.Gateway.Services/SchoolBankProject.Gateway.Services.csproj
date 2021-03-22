@@ -116,8 +116,10 @@
   <ItemGroup>
     <Compile Include="AccountService\AccoutGatewayServices.cs" />
     <Compile Include="CustomerService\CustomerGatewayServices.cs" />
+    <Compile Include="IdentityService\IdentityGatewayServices.cs" />
     <Compile Include="Interfaces\IAccountGateway.cs" />
     <Compile Include="Interfaces\ICustomerGateway.cs" />
+    <Compile Include="Interfaces\IIdentityGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

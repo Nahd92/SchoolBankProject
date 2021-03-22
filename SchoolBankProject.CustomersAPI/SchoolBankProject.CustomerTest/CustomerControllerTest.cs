@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SchoolBankProject.CustomerAPI.Controllers;
-using SchoolBankProject.Domain.CustomerModels;
 using SchoolBankProject.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,9 +8,9 @@ using System.Web.Http.Results;
 using FluentAssertions;
 using System;
 using System.Linq;
-using SchoolBankProject.Domain.AccountModels;
 using SchoolBankProject.DTOs.CustomerDTOs.Request;
 using SchoolBankProject.DTOs.CustomerDTOs.Response;
+using SchoolBankProject.LinqSql.Data;
 
 namespace SchoolBankProject.CustomerTest
 {
@@ -31,14 +30,15 @@ namespace SchoolBankProject.CustomerTest
         private IEnumerable<Customer> AlistOfCustomers = new List<Customer>
         {
             new Customer() {
-            Id = Guid.NewGuid(),
+            Id = 1,
             Address = "Gothenburg",
             Country = "Sweden",
             FirstName = "Jörgen",
             LastName = "Svensson",
             PersonalNumber = "750304-2322",
             PhoneNumber = 043203213},
-            new Customer() {Id = Guid.NewGuid(),
+            new Customer() {
+            Id =1,
             Address = "Gothenburg",
             Country = "Sweden",
             FirstName = "Jörgen",
@@ -51,7 +51,7 @@ namespace SchoolBankProject.CustomerTest
         private IEnumerable<Customer> emptyListofCustomers = null;
         private Customer customerById = new Customer()
         {
-            Id = Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF"),
+            Id = 1,
             Address = "Gothenburg",
             Country = "Sweden",
             FirstName = "Jörgen",
@@ -74,23 +74,23 @@ namespace SchoolBankProject.CustomerTest
 
 
         [TestMethod]
-        public async Task TestGetAllCustomers_WithNoCustomers_ShouldReturnNotFound()
+        public void TestGetAllCustomers_WithNoCustomers_ShouldReturnNotFound()
         {
             //Arrange          
-            mockService.Setup(x => x.Customers.GetAllCustomers()).Returns(Task.Run(() => emptyListofCustomers));
+            mockService.Setup(x => x.Customers.GetAllCustomers()).Returns(emptyListofCustomers);
             //Act
-            var response = await customerController.GetAllCustomers();
+            var response = customerController.GetAllCustomers();
             //Assert
             response.Should().BeOfType<NotFoundResult>();
         }
 
         [TestMethod]
-        public async Task TestGetAllCustomers_WithTwoCustomersInList_ShouldReturnCorrectNumbersOfCustomers()
+        public void TestGetAllCustomers_WithTwoCustomersInList_ShouldReturnCorrectNumbersOfCustomers()
         {
             //Arrange
-            mockService.Setup(x => x.Customers.GetAllCustomers()).Returns(Task.Run(() => AlistOfCustomers));
+            mockService.Setup(x => x.Customers.GetAllCustomers()).Returns(AlistOfCustomers);
             //Act
-            var response = await customerController.GetAllCustomers();
+            var response =  customerController.GetAllCustomers();
             //Assert
             var result = response.Should().BeOfType<JsonResult<IEnumerable<Customer>>>().Subject;
             var customer = result.Content.Should().BeAssignableTo<IEnumerable<Customer>>().Subject;
@@ -98,12 +98,12 @@ namespace SchoolBankProject.CustomerTest
         }
 
         [TestMethod]
-        public async Task TestGetCustomerById_WithCorrectId_ShouldReturnCorrectCustomerWithSameId()
+        public void TestGetCustomerById_WithCorrectId_ShouldReturnCorrectCustomerWithSameId()
         {
             //Arrange
-            mockService.Setup(x => x.Customers.GetCustomerById(It.IsAny<Guid>())).Returns(Task.Run(() => customerById));
+            mockService.Setup(x => x.Customers.GetCustomerById(It.IsAny<int>())).Returns(customerById);
             //Act
-            var response = await customerController.GetById(Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF"));
+            var response =  customerController.GetById(1);
             //Assert
             var result = response.Should().BeOfType<JsonResult<Customer>>().Subject;
             var customer = result.Content.Should().BeAssignableTo<Customer>().Subject;
@@ -111,20 +111,20 @@ namespace SchoolBankProject.CustomerTest
         }
 
         [TestMethod]
-        public async Task TestGetCustomerById_WithBadId_ShouldReturnNotFoundResult()
+        public void TestGetCustomerById_WithBadId_ShouldReturnNotFoundResult()
         {
             //Arrange
-            mockService.Setup(x => x.Customers.GetCustomerById(It.IsAny<Guid>()));
-            mockService.Setup(y => y.Customers.GetAllCustomers()).Returns(Task.Run(() => emptyListofCustomers));
+            mockService.Setup(x => x.Customers.GetCustomerById(It.IsAny<int>()));
+            mockService.Setup(y => y.Customers.GetAllCustomers()).Returns(emptyListofCustomers);
             //Act
-            var response = await customerController.GetById(Guid.NewGuid());
+            var response =  customerController.GetById(1);
             //Assert
-            mockService.Verify(x => x.Customers.GetCustomerById(It.IsAny<Guid>()), Times.Once());
+            mockService.Verify(x => x.Customers.GetCustomerById(It.IsAny<int>()), Times.Once());
             response.Should().BeOfType<NotFoundResult>();
         }
 
         [TestMethod]
-        public async Task TestCreateCustomer_ReturnsCorrectAccountType()
+        public void TestCreateCustomer_ReturnsCorrectAccountType()
         {
             //Arrange
             var customer = new CreateCustomerRequest()
@@ -138,27 +138,27 @@ namespace SchoolBankProject.CustomerTest
                 Type = "SavingsAccount"
             };
 
-            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<Customer>())).ReturnsAsync(true);
+            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()));
             mockService.Setup(y => y.BankAccount.GetAccountTypeByName(It.IsAny<string>()))
-                                    .ReturnsAsync(() => new AccountType { Type = "SavingsAccount" });
-            mockService.Setup(e => e.BankAccount.CreateBankAccount(It.IsAny<BankAccount>())).ReturnsAsync(() => new BankAccount
+                                    .Returns(() => new AccountType { Type = "SavingsAccount" });
+            mockService.Setup(e => e.BankAccount.CreateBankAccount(It.IsAny<BankAccount>())).Returns(() => new BankAccount
             {
-                Id = (Guid.Parse("CF3A6B4E-9D3D-45E9-AF0B-40DB338930EF")),
+                Id = 1,
                 AccountNumber = "1234567",
                 Balance = 0,
                 ClearingNumber = "8430",
                 IBANNumber = "2134512345123",
                 AccountTypeId = 1,
-                CustomerId = (Guid.Parse("CF3A6B4E-8DEF-45E9-AF0B-40DB338930EF")),
+                CustomerId = 2,
             });
 
 
             //Act
-            var response = await customerController.CreateCustomer(customer);
+            var response = customerController.CreateCustomer(customer);
 
 
             //Assert
-            mockService.Verify(x => x.Customers.CreateCustomer(It.IsAny<Customer>()), Times.Once());
+            mockService.Verify(x => x.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()), Times.Once());
             mockService.Verify(x => x.BankAccount.GetAccountTypeByName(It.IsAny<string>()), Times.Once());
             mockService.Verify(x => x.BankAccount.CreateBankAccount(It.IsAny<BankAccount>()), Times.Once());
             var result = response.Should().BeOfType<JsonResult<CreatedCustomerResponse>>().Subject;
@@ -168,40 +168,40 @@ namespace SchoolBankProject.CustomerTest
 
 
         [TestMethod]
-        public async Task TestCreateCustomer_WithEmptyCustomerRequest_ShouldReturnBadRequest()
+        public void TestCreateCustomer_WithEmptyCustomerRequest_ShouldReturnBadRequest()
         {
             //Arrange
-            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<Customer>())).ReturnsAsync(true);
+            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()));
             customerController.ModelState.AddModelError("key", "error message");
             //Act
-            var response = await customerController.CreateCustomer(null);
+            var response = customerController.CreateCustomer(null);
             //Assert
             var result = response.Should().BeOfType<BadRequestErrorMessageResult>().Subject;
             result.Message.Should().Be("Some fields was not inputed");
         }
 
         [TestMethod]
-        public async Task TestCreateCustomer_NotCreatingCustomerCorrectyl_ShouldReturnBadRequest()
+        public void TestCreateCustomer_NotCreatingCustomerCorrectyl_ShouldReturnBadRequest()
         {
             //ARrange
-            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<Customer>())).ReturnsAsync(false);
+            mockService.Setup(x => x.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()));
             //Act
-            var response = await customerController.CreateCustomer(customer);
+            var response =  customerController.CreateCustomer(customer);
             //assert
             var result = response.Should().BeOfType<BadRequestErrorMessageResult>().Subject;
             result.Message.Should().Be("Something went wrong in creating customer");
         }
 
         [TestMethod]
-        public async Task TestCreateCustomer_ReturningEmptyAccountType_ShouldReturnBadRequest()
+        public void TestCreateCustomer_ReturningEmptyAccountType_ShouldReturnBadRequest()
         {
             //Arrange
             mockService.Setup(x => x.BankAccount.GetAccountTypeByName(null));
-            mockService.Setup(y => y.Customers.CreateCustomer(It.IsAny<Customer>())).ReturnsAsync(true);
+            mockService.Setup(y => y.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()));
             //Act
-            var response = await customerController.CreateCustomer(customer);
+            var response = customerController.CreateCustomer(customer);
             //Assert
-            mockService.Verify(x => x.Customers.CreateCustomer(It.IsAny<Customer>()), Times.Once());
+            mockService.Verify(x => x.Customers.CreateCustomer(It.IsAny<CreateCustomerRequest>()), Times.Once());
             mockService.Verify(x => x.BankAccount.GetAccountTypeByName(It.IsAny<string>()), Times.Once());
             var result = response.Should().BeOfType<BadRequestErrorMessageResult>().Subject;
             result.Message.Should().Be("No AccountType exist with that name");

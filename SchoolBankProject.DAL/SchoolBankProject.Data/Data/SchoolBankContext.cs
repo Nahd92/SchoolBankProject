@@ -1,11 +1,14 @@
-﻿using SchoolBankProject.Domain.AccountModels;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using SchoolBankProject.Data.AppliationUser;
+using SchoolBankProject.Domain.AccountModels;
+using SchoolBankProject.Domain.AccountTypes;
 using SchoolBankProject.Domain.CustomerModels;
 using SchoolBankProject.Domain.TransactionModels;
 using System.Data.Entity;
 
 namespace SchoolBankProject.Data
 {
-    public class SchoolBankContext : DbContext
+    public class SchoolBankContext : IdentityDbContext<ApplicationUser>
     { 
         public SchoolBankContext() : base("SchoolBankDatabase")
         {
@@ -22,6 +25,11 @@ namespace SchoolBankProject.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+        }
+
+        public static SchoolBankContext Create()
+        {
+            return new SchoolBankContext();
         }
     }
 }

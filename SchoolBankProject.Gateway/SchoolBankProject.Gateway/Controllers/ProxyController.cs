@@ -1,4 +1,5 @@
-﻿using SchoolBankProject.DTOs.AccountDTOs.Request;
+﻿using SchoolBankProject.Domain.Models.UserModels;
+using SchoolBankProject.DTOs.AccountDTOs.Request;
 using SchoolBankProject.DTOs.CustomerDTOs.Request;
 using SchoolBankProject.Gateway.Services.Interfaces;
 using System;
@@ -16,10 +17,13 @@ namespace SchoolBankProject.Gateway.Controllers
 
         private readonly IAccountGateway _accountServices;
         private readonly ICustomerGateway _customerService;
-        public ProxyController(IAccountGateway accountServices, ICustomerGateway customerService)
+        private readonly IIdentityGateway _identityService;
+        public ProxyController(IAccountGateway accountServices, 
+            ICustomerGateway customerService, IIdentityGateway identityService)
         {
             _accountServices = accountServices;
             _customerService = customerService;
+            _identityService = identityService;
         }
 
 
@@ -60,6 +64,13 @@ namespace SchoolBankProject.Gateway.Controllers
         public async Task<HttpResponseMessage> DeleteCustomer(Guid id) => await _customerService.DeleteACustomer(id);
         [HttpPut]
         public async Task<HttpResponseMessage> UpdateCustomer(UpdateCustomerRequest request) => await _customerService.UpdateACustomer(request);
+
+
+        //Identity
+        [HttpPost]
+        public async Task<HttpResponseMessage> RegisterUser(RegisterRequest request) =>
+                   await _identityService.RegisterUser(request);
+
 
     }
 }
