@@ -85,6 +85,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\..\SchoolBankProjet.API\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\SchoolBankProjet.API\packages\SimpleInjector.5.3.0\lib\net461\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.WebApi, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\SchoolBankProjet.API\packages\SimpleInjector.Integration.WebApi.5.0.0\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -143,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SimpleInjection.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
@@ -178,6 +185,18 @@
     <ProjectReference Include="..\..\SchoolBankProject.DAL\SchoolBankProject.Domain\SchoolBankProject.Domain.csproj">
       <Project>{33d7175e-b09b-4106-8cec-f7664b6b12ec}</Project>
       <Name>SchoolBankProject.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.Data.LinqSQL\SchoolBankProject.LinqSql.Data\SchoolBankProject.LinqSql.Data.csproj">
+      <Project>{E34CD490-20AE-47BF-9F5D-9F3D3E824B5E}</Project>
+      <Name>SchoolBankProject.LinqSql.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.DTOs\SchoolBankProject.DTOs\SchoolBankProject.DTOs.csproj">
+      <Project>{4828A12D-FC00-490E-AB89-8452D72FB609}</Project>
+      <Name>SchoolBankProject.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchoolBankProject.Services\SchoolBankProject.Services\SchoolBankProject.Services.csproj">
+      <Project>{A52EF6FF-5BC9-4453-8ACA-10324531D61F}</Project>
+      <Name>SchoolBankProject.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

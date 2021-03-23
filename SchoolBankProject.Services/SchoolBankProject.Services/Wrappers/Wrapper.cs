@@ -2,6 +2,7 @@
 using SchoolBankProject.LinqSql.Data;
 using SchoolBankProject.Services.Interfaces;
 using SchoolBankProject.Services.Repositories;
+using SchoolBankProject.Services.ServiceInterfaces;
 using SchoolBankProject.Services.Services;
 
 namespace SchoolBankProject.Services.RepositoryWrapper
@@ -12,6 +13,9 @@ namespace SchoolBankProject.Services.RepositoryWrapper
         private  ICustomerRepository _customerRepo;
         private  ITransactionRepository _transactionRepo;
         private IBankAccountService _bankService;
+        private IIdentityRepository _identityRepo;
+        private IUserService _userService;
+
 
         public IBankAccountRepository BankAccount
         {
@@ -60,6 +64,31 @@ namespace SchoolBankProject.Services.RepositoryWrapper
                 return _bankService;
             }
         }
+
+        public IUserService UserService
+        {
+            get
+            {
+                if (_userService == null)
+                {
+                    _userService = new UserService();
+                }
+                return _userService;
+            }
+        }
+
+        public IIdentityRepository Identity 
+        {
+            get
+            {
+                if (_identityRepo == null)
+                {
+                    _identityRepo = new IdentityRepository();
+                }
+                return _identityRepo;
+            }
+        }
+
         public RepositoryWrapper(IBankAccountRepository accountRepo)
         {
          

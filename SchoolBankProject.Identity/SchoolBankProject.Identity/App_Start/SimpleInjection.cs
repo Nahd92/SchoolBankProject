@@ -1,9 +1,6 @@
-﻿using SchoolBankProject.Data;
-using SchoolBankProject.LinqSql.Data;
-using SchoolBankProject.Services.Interfaces;
+﻿using SchoolBankProject.Services.Interfaces;
 using SchoolBankProject.Services.Repositories;
 using SchoolBankProject.Services.RepositoryWrapper;
-using SchoolBankProject.Services.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
@@ -13,9 +10,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace SchoolBankProject.CustomerAPI.App_Start
+namespace SchoolBankProject.Identity.App_Start
 {
-    public static class SimpleInject
+    public static class SimpleInjection
     {
         public static void RegisterSimpleInjection(HttpConfiguration config)
         {
@@ -28,6 +25,7 @@ namespace SchoolBankProject.CustomerAPI.App_Start
             container.Register<ICustomerRepository, CustomerRepository>(Lifestyle.Scoped);
             container.Register<ITransactionRepository, TransactionsRepository>(Lifestyle.Scoped);
             container.Register<IIdentityRepository, IdentityRepository>(Lifestyle.Scoped);
+
 
             //  container.Register<SchoolBankContext>(Lifestyle.Scoped);
             //container.Register<LinqDataDataContext>(Lifestyle.Scoped);

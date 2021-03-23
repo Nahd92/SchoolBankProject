@@ -12,5 +12,6 @@ namespace SchoolBankProject.Services.Interfaces
         string ReturnClearingNumber();
         bool DepositIsPossible(BankAccount bankAccount, int amount);
         bool WithdrawIsPossible(BankAccount bankAccount, int amount);
+        float CalculateWithdrawFee(BankAccount bankAccount);
     }
 }

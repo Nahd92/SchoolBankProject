@@ -59,9 +59,13 @@ namespace SchoolBankProject.CustomerAPI.Controllers
         [Route(RoutesAPI.Customers.CreateCustomer)]
         public IHttpActionResult CreateCustomer([FromBody] CreateCustomerRequest createCustomerRequest)
         {
-
+        
           var createdCustomer =  _repository.Customers.CreateCustomer(createCustomerRequest);
-          var accountType = _repository.BankAccount.GetAccountTypeByName(createCustomerRequest.Type);
+
+            if (createdCustomer == null)
+                return BadRequest("Not all fields were inputed");
+
+            var accountType = _repository.BankAccount.GetAccountTypeByName(createCustomerRequest.Type);
 
            if (accountType == null)
                 return BadRequest("No AccountType exist with that name");

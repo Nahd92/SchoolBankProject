@@ -59,7 +59,10 @@
     <Compile Include="CustomerDTOs\Response\CustomerResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferDTOs\Request\TransactionCreateDTO.cs" />
-    <Compile Include="UserDTOs\UserRegisterRequest.cs" />
+    <Compile Include="UserDTOs\Request\LoginRequest.cs" />
+    <Compile Include="UserDTOs\Request\UserRegisterRequest.cs" />
+    <Compile Include="UserDTOs\Response\UserLoggedInResponse.cs" />
+    <Compile Include="UserDTOs\Response\UserRegisteredResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientsDTOs\Response\" />

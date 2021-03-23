@@ -24,6 +24,7 @@ namespace SchoolBankProjet.API.App_Start
             container.Register<IBankAccountRepository, BankAccountRepository>(Lifestyle.Scoped);
             container.Register<ICustomerRepository, CustomerRepository>(Lifestyle.Scoped);
             container.Register<ITransactionRepository, TransactionsRepository>(Lifestyle.Scoped);
+            container.Register<IIdentityRepository, IdentityRepository>(Lifestyle.Scoped);
 
             //  container.Register<SchoolBankContext>(Lifestyle.Scoped);
             //container.Register<LinqDataDataContext>(Lifestyle.Scoped);

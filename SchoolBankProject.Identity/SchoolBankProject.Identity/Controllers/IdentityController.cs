@@ -2,82 +2,71 @@
 using Microsoft.AspNet.Identity.Owin;
 using SchoolBankProject.Data.AppliationUser;
 using SchoolBankProject.Domain.Models.UserModels;
+using SchoolBankProject.Domain.Routes;
+using SchoolBankProject.DTOs.UserDTOs.Request;
+using SchoolBankProject.DTOs.UserDTOs.Response;
 using SchoolBankProject.Identity.App_Start;
+using SchoolBankProject.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace SchoolBankProject.Identity.Controllers
 {
-    [RoutePrefix("api/Identity")]
+
+
     public class IdentityController : ApiController
     {
-
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-
-        public IdentityController()
+        private readonly IRepositoryWrapper _repository;
+        public IdentityController(IRepositoryWrapper repository)
         {
-
+            _repository = repository;
         }
 
-        public IdentityController(ApplicationSignInManager signInManager, ApplicationUserManager userManager)
+        
+        [HttpPost]
+        [Route(RoutesAPI.Identity.Login)]
+        public IHttpActionResult Login(LoginRequest request)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            var IsLoggedIn = _repository.Identity.Login(request.Email, request.Password);
+
+            if (IsLoggedIn)
+            {
+                var response = new UserLoggedInResponse
+                {
+                    Email = request.Email,
+                    Password = request.Password,
+                    ResponseMessage = "Logged In"
+                };
+                return Ok(response);
+            }
+          
+            return BadRequest("Something happened, Try to login again!");
         }
 
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.Current.GetOwinContext()
-                    .Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Register(RegisterRequest request)
+        [Route(RoutesAPI.Identity.Register)]
+        public IHttpActionResult Register(RegisterRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = request.Email, Email = request.Email };
-                var result = await UserManager.CreateAsync(user, request.Password);
+            //This happening on client side? 
+            if (request.Password != request.ConfirmPassword)
+                return BadRequest("Passwords not equal");
 
-                if (result.Succeeded)
+            var registered = _repository.Identity.Register(request.Email, request.Password);
+
+            if (registered)
+            {
+                var response = new UserRegisteredResponse
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return Ok();
-                }
-                AddErrors(result);
-
+                    Email = request.Email,
+                    Password = request.Password,
+                    ResponseMessage = "You are registered"
+                };
+                return Json(response);
             }
-            return BadRequest("Could not register User");
-        }
 
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+            return BadRequest("Was not possible to register, try again");             
         }
     }
 }

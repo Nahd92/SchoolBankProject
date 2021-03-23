@@ -1,4 +1,6 @@
-﻿namespace SchoolBankProject.Services.Interfaces
+﻿using SchoolBankProject.Services.ServiceInterfaces;
+
+namespace SchoolBankProject.Services.Interfaces
 {
     public interface IRepositoryWrapper
     {
@@ -6,5 +8,9 @@
         ICustomerRepository Customers { get; }
         ITransactionRepository Transactions { get; }
         IBankAccountService BankAccountService { get; }
+        IIdentityRepository Identity { get;  }
+        IUserService UserService { get; }
+
+
     }
 }

@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IIdentityRepository.cs" />
+    <Compile Include="Repositories\IdentityRepository.cs" />
     <Compile Include="ServiceInterfaces\IBankAccountService.cs" />
     <Compile Include="Interfaces\IBankAccountRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
@@ -56,6 +58,8 @@
     <Compile Include="Repositories\BankAccountRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\TransactionsRepository.cs" />
+    <Compile Include="ServiceInterfaces\IUserService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Wrappers\Wrapper.cs" />
     <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\CustomerServices.cs" />

@@ -36,7 +36,7 @@ namespace SchoolBankProject.Services.Services
 
 
 
-        private float CalculateWithdrawFee(BankAccount account) 
+        public float CalculateWithdrawFee(BankAccount account) 
         {
             switch (account.AccountType.Id)
             {
